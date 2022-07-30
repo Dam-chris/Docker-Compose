@@ -1,0 +1,24 @@
+version: '3'
+services:
+        drupal:
+                container_name: drupal
+                image: drupal
+                volumes:
+                        - drupal-html:/var/www/html
+                ports:
+                        - 80:80
+                networks:
+                        - net-drupal
+        postgres:
+                container_name: postgres
+                image: postgres:10-alpine
+                env_file:
+                        - postgres.env
+                volumes:
+                        - $PWD/data:/var/lib/postgresql/data
+                networks:
+                        - net-drupal
+volumes:
+        drupal-html:
+networks:
+        net-drupal:
